@@ -7,6 +7,12 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     @base_title = "Ruby on Rails Tutorial Sample App"
   end
 
+  # rootルーティングのテスト
+  test "should get root" do
+    get root_url
+    assert_response :success
+  end
+
   # GETリクエストをhomeアクションに対して送信
   # assertionで確認(ここでは、レスポンスが200/successになる)
   test "should get home" do
@@ -35,5 +41,13 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     # assert_selectで特定のHTMLタグが存在するかをテスト
     # ここでは、<title>About | Ruby on Rails Tutorial Sample App</title>が存在するかテスト
     assert_select "title", "About | #{@base_title}"
+  end
+
+  # GETリクエストをcontactアクションに対して送信
+  # assertionで確認(ここでは、レスポンスが200/successになる)
+  test "should get contact" do
+    get static_pages_contact_url
+    assert_response :success
+    assert_select "title", "Contact | #{@base_title}"
   end
 end
