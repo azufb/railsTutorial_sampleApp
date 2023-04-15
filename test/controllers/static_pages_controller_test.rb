@@ -20,7 +20,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     # assert_selectで特定のHTMLタグが存在するかをテスト
     # ここでは、<title>Home | Ruby on Rails Tutorial Sample App</title>が存在するかテスト
-    assert_select "title", "Home | #{@base_title}"
+    assert_select "title", @base_title
   end
 
   # GETリクエストをhelpアクションに対して送信
