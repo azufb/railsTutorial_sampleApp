@@ -12,6 +12,8 @@ class ActiveSupport::TestCase
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
+  # includeして、test環境でもApplicationヘルパーを使えるようにする
+  include ApplicationHelper
 
   # Add more helper methods to be used by all tests here...
 end
