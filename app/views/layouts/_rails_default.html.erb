@@ -1,0 +1,7 @@
+<!-- headタグ内の一部要素をパーシャルとして切り出し -->
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<!-- スタイルシートを読み込む -->
+<!-- stylesheet_link_tagというメソッドを呼び出している。引数は、"application"と、{"data-turbo-track": "reload"} -->
+<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
