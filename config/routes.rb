@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   get  "/about",   to: "static_pages#about"
   get  "/contact", to: "static_pages#contact"
   get "/signup", to: "users#new"
+
+  # 名前付きルーティング・RESTfulなUsersリソースで必要な全てのアクションが利用できるようになる
+  resources :users
 end
