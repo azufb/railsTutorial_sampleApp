@@ -5,5 +5,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    # Userオブジェクトを作る
+    @user = User.new
   end
 end

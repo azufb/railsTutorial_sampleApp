@@ -11,6 +11,12 @@ application.cssの一部としてWebサイトのレイアウトに読み込ま�
 
 $gray-medium-light: #eaeaea;
 
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 /* universal */
 body {
   padding-top: 60px;
@@ -137,6 +143,21 @@ aside {
 
 .gravatar_edit {
   margin-top: 15px;
+}
+
+/* forms */
+input,
+textarea,
+select,
+.uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
 }
 
 /* miscellaneous デバッグ情報を整形して表示したい */
