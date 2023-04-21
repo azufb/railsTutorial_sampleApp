@@ -13,6 +13,9 @@
 
     <!-- ページごとの内容 -->
     <div class="container">
+      <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <% end %>
       <%= yield %>
       <%= render 'layouts/footer' %>
       <!-- 開発環境では、デバッグ用の情報を表示する -->
