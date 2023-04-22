@@ -19,4 +19,9 @@ module SessionsHelper
         # sessionにユーザidが存在している、current_user関数の結果がnilではないこと
         !current_user.nil?
     end
+
+    def log_out
+        reset_session
+        @current_user = nil
+    end
 end
