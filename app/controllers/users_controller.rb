@@ -13,6 +13,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      # セッション固定攻撃対策でセッションidをリセット
+      reset_session
+      # ユーザ登録と一緒にログインも済ませる
+      log_in @user
       # 登録完了したことを示すメッセージを表示
       # flashという変数を使う
       flash[:success] = "Welcome to the Sample App!"
