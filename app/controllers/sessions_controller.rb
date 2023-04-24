@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
       # セッション固定攻撃に対応するため、ログイン直前にセッションをリセットする
       # 新しいセッションidが使われるようになる
       reset_session
+      remember user
       # sessions_helperで定義したlog_in関数でログイン
       log_in user
       redirect_to user
@@ -18,7 +19,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
+    # logged_inがtrueの場合はlog_out
+    log_out if logged_in?
     # :see_otherでルートURLにリダイレクト
     redirect_to root_url, status: :see_other
   end
