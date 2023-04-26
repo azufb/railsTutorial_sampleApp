@@ -15,8 +15,7 @@ class User < ApplicationRecord
     # passwordとpassword_confirmationが使えるようになり、存在と値が一致するかどうかのバリデーションも追加
     # authenticateメソッドが使えるようになる
     has_secure_password
-
-    validates :password, presence: true, length: { minimum: 6 }
+    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
     # テスト用データ(fixture)向けのdigestメソッド
     def User.digest(string)
