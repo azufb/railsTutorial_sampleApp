@@ -5,6 +5,9 @@ module SessionsHelper
         # ユーザIDを暗号化
         # ブラウザを閉じた瞬間に、有効期限が切れてしまう
         session[:user_id] = user.id
+        # セッションリプレイ攻撃から保護する
+        # 詳しくは https://bit.ly/33UvK0w を参照
+        session[:session_token] = user.session_token
     end
 
     # 永続セッションのためにユーザーをデータベースに記憶する
@@ -17,7 +20,10 @@ module SessionsHelper
     def current_user
         # 現在ログイン中のユーザがいる場合、ログイン中のユーザを返す
         if (user_id = session[:user_id])
-            @current_user ||= User.find_by(id: user_id)
+            user = User.find_by(id: user_id)
+            if user && session[:session_token] == user.session_token
+                @current_user = user
+            end
         elsif (user_id = cookies.encrypted[:user_id])
             user = User.find_by(id: user_id)
             if user && user.authenticated?(cookies[:remember_token])
@@ -25,6 +31,11 @@ module SessionsHelper
                 @current_user = user
             end
         end
+    end
+
+    # 渡されたユーザーがカレントユーザーであればtrueを返す
+    def current_user?(user)
+        user && user == current_user
     end
 
     # ログイン状態をチェックする
@@ -44,5 +55,10 @@ module SessionsHelper
         forget(current_user)
         reset_session
         @current_user = nil
+    end
+
+    # アクセスしようとしたURLを保存する
+    def store_location
+        session[:forwarding_url] = request.original_url if request.get?
     end
 end
