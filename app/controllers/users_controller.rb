@@ -5,6 +5,12 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
 
+  def index
+    # ユーザを取得
+    # paginateメソッドを使って、引数として受け取ったページ番号の一塊のデータを取り出す
+    @users = User.paginate(page: params[:page])
+  end
+
   # データベースからユーザを取り出す
   def show
     @user = User.find(params[:id])

@@ -211,6 +211,17 @@ input {
   display: block;
 }
 
+/* Users index */
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
 /* miscellaneous デバッグ情報を整形して表示したい */
 .debug_dump {
   clear: both;

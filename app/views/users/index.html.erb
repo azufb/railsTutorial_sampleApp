@@ -1,0 +1,15 @@
+<% provide(:title, 'All users') %>
+<h1>All users</h1>
+
+<!-- ページネーション実装のため、will_paginateというGemを使用 -->
+<!-- usersビューのコードから、@usersオブジェクトを自動で見つけることができる -->
+<%= will_paginate %>
+
+<ul class="users">
+  <% @users.each do |user| %>
+    <!-- @usersをUserオブジェクトのリストだと推測する -->
+    <%= render @users %>
+  <% end %>
+</ul>
+
+<%= will_paginate %>
