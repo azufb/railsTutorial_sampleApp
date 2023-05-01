@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   # 名前付きルーティング・RESTfulなUsersリソースで必要な全てのアクションが利用できるようになる
   resources :users
+  # editアクションへの名前付きルーティング
+  resources :account_activations, only: [:edit]
 end

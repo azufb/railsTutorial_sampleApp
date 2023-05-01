@@ -1,9 +1,11 @@
 class User < ApplicationRecord
     # インスタンス変数remember_tokenに対する読み取りメソッドと書き込みメソッドの両方を定義
-    attr_accessor :remember_token
+    attr_accessor :remember_token, :activation_token
     # データベースに保存される直前にemailを小文字に変換する
-    # before_save { self.email = email.downcase }
-    before_save { email.downcase! }
+    # before_save :メソッド名とすることで、メソッドを探して実行してくれる（メソッド参照）
+    before_save :downcase_email
+    # before_createはオブジェクトが生成される直前
+    before_create :create_activation_digest
 
     # validates(:name, presence: true)の書き方でもOK
     validates :name, presence: true, length: { maximum: 50 }
@@ -53,5 +55,18 @@ class User < ApplicationRecord
     def forget
         # 記憶ダイジェストをnilで更新
         update_attribute(:remember_digest, nil)
+    end
+
+    private
+
+    # メールアドレスをすべて小文字にする
+    def downcase_email
+      self.email = email.downcase
+    end
+
+    # 有効化トークンとダイジェストを作成および代入する
+    def create_activation_digest
+      self.activation_token  = User.new_token
+      self.activation_digest = User.digest(activation_token)
     end
 end
