@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   resources :users
   # editアクションへの名前付きルーティング
   resources :account_activations, only: [:edit]
+
+  resources :password_resets, only: [:new, :create, :edit, :update]
 end
