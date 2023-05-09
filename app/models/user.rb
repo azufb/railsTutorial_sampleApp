@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_many :microposts, dependent: :destroy
     # インスタンス変数remember_tokenに対する読み取りメソッドと書き込みメソッドの両方を定義
     attr_accessor :remember_token, :activation_token, :reset_token
     # データベースに保存される直前にemailを小文字に変換する
