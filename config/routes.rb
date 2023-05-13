@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
 
   # 名前付きルーティング・RESTfulなUsersリソースで必要な全てのアクションが利用できるようになる
   resources :users
@@ -19,5 +24,6 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   get '/microposts', to: 'static_pages#home'
 end
