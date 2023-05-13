@@ -3,3 +3,4 @@ import '@hotwired/turbo-rails';
 import 'controllers';
 // ドロップダウンメニューのJavaScriptコードをインポート
 import 'custom/menu';
+import 'custom/image_upload';

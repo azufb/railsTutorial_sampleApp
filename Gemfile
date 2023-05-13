@@ -5,7 +5,8 @@ ruby "3.2.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
-
+gem "image_processing", "1.12.2"
+gem "active_storage_validations", "0.9.8"
 gem "bcrypt",          "3.1.18"
 gem "faker",           "2.21.0" # 実際にいそうな架空のユーザ名を生成するGem
 gem "will_paginate",           "3.3.1"
