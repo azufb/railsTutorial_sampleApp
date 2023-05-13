@@ -6,6 +6,10 @@ class StaticPagesController < ApplicationController
   # Rubyでは、メソッド(アクション)の中身が空であれば、何も実行しないが、
   # Railsの場合は、ApplicationControllerを継承しており、対応するビューが表示される。
   def home
+    if logged_in?
+      @micropost  = current_user.microposts.build
+      @feed_items = current_user.feed.paginate(page: params[:page])
+    end
   end
 
   def help
